@@ -24,3 +24,11 @@ print("type variable adalah",type(type_string),"\n")
 type_bool = True
 print("nilai variable adalah", type_bool)
 print("type variable adalah",type(type_bool),"\n")
+
+# selain tipe data diatas python dapat mengambil tipe data dalam bahasa c
+# dikarenakan python dibuat berdasarkan bahasa c
+
+from ctypes import c_char, c_ushort, c_double
+data_c = c_double(123.56)
+print("nilai variable adalah", data_c)
+print("type variable adalah",type(data_c),"\n")
