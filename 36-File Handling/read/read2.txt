@@ -1,0 +1,2 @@
+hallo ini dari read 2
+text ini ditambahkan dari append
