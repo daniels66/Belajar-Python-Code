@@ -19,10 +19,6 @@ mode xt = create text
 mode xb = create binary
 """
 
-from distutils.file_util import write_file
-from genericpath import exists
-
-
 path1 = "/home/daniels66/Downloads/[Code]/Belajar Python [Code]/36-File Handling/read/read.txt"
 path2 = "/home/daniels66/Downloads/[Code]/Belajar Python [Code]/36-File Handling/read/read2.txt"
 
