@@ -1,0 +1,20 @@
+- PIP adalah sebuah perintah untuk melakukan proses penambahan
+  atau pengurangan module python secara daring
+  artinya perintah ini akan melakukan installasi sebuah module python 
+  dengan mencari module tersebut pada repository module python 
+  yang berada di alamat atau web https://pypi.org/ 
+
+- contoh PIP
+1. numpy = digunakan untuk data science
+2. django = digunakan untuk website
+3. pygame = digunakan untuk membuat game
+4. flask = digunakan untuk web framework
+5. kivy = membangun aplikasi mobile serta berbagai perangkat lunak lain
+6. matplotlib = digunakan untuk menvisualisasikan data
+
+- installasi numpy dengan PIP
+1. buka https://pypi.org/
+2. ketik numpy
+3. pilih dan ketik di terminal pip install numpy
+4. untuk cek pip yang telah di install ketik pip --list
+5. untuk uninstall pip ketik pip uninstall <package>
