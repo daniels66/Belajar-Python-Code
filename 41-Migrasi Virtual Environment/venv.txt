@@ -1,0 +1,14 @@
+migrasi virtual environment dari environment 1 ke environment lain
+migrasi environment digunakan agar pip versi yang terinstall di environment 1
+dapat di install di environment lain / server lain dengan versi pip yang sama
+dengan environment 1
+
+- migrasi environment
+1. pada terminal ketik pip3 freeze --local -> <nama>.txt
+2. akan muncul file dengan nama yang telah diketik
+3. copy file tersebut di dalam environment lain yang telah dibuat
+4. pada terminal ketik pip3 install -r <nama>.txt
+5. ketik pip list (untuk melihat apakah sudah pip sudah sesuai atau belum)
+
+* file requirment.txt adalah mengambil file pip yang 
+  telah terinstall pada pembelajaran sebelumnya
