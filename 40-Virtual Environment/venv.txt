@@ -1,0 +1,25 @@
+Virtual Environment
+
+pada saat membuat projek dalam python sebaiknya menggunakan suatu virtual environment
+virtual environment sendiri berguna agar projek yang dikerjakan tidak tergangu oleh
+versi update terbaru package-package yang digunakan
+contoh kita mengerjakan projek menggunakan numpy versi 1.1.4, 2 tahun lagi ada versi 1.3.4
+apabila ingin mengerjakan projek lama kembali maka projek tersebut tidak akan terpengaruh
+oleh update numpy versi terbaru 
+(sebuah fungsi dalam numpy versi 1.1.4 tidak dapat dijalankan di numpy versi 1.3.4)
+hal tersebut tidak akan terjadi apabila menggunakan virtual environment
+
+- cara membuat virtual environment (venv)
+1. pastikan sudah terinstall pip install virtualenv
+2. cek versi virtualenv (virtualenv --version)
+3. ketik virtualenv <nama projek> didalam terminal
+4. akan muncul folder <nama projeck>
+5. untuk aktivasi virtual environment ketik source <nama projek>/bin/activate
+6. ketik which pyhton (untuk cek python dalam folder mana yang digunakan)
+7. ketik pip list (untuk cek pip apa saja yang telah diinstal)
+8. virtual environment sudah dapat digunakan, anda dapat install
+   pip yang dibutuhkan secara terpisah dengan pip komputer
+9. pastikan install black pip agar kode tertata rapih
+10. untuk deactivate virtualenv ketik deactivate padaterminal
+11. anda dapat membuat folder didalam atau diluar folder virtual environment
+    akan jalan seperti biasa
