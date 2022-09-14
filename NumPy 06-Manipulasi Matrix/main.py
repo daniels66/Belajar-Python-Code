@@ -31,3 +31,16 @@ print(f"matrix ukuran = {a.shape}")  # ukuran matrix berubah dari 4 kolom dan 3 
 dengan menggunakan resize matrix, matrix sebelumnya dirubah sepenuhnya 
 mengikuti ukuran yang telah ditentukan
 """
+
+# stacking matrix
+print("stacking matrix".center(20, "-"))
+a = np.array([[1, 2, 3], [4, 5, 6]])
+b = np.array([[7, 8, 9], [10, 11, 12]])
+
+c = np.hstack((a, b))  # taruh secara horizontal matrix b disebelah matrix a
+print(c)  # matrix b berada di sebelah kanan matrix a
+print(f"matrix ukuran = {c.shape}")  # ukuran akan berubah
+
+d = np.vstack((a, b))  # taruh secara vertikal matrix b disebelah matrix a
+print(d)  # matrix b berada di bawah matrik a
+print(f"matrix ukuran = {d.shape}")  # ukuran akan berubah
