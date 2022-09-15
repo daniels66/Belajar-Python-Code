@@ -21,6 +21,11 @@ print("reshape matrix".center(20, "-"))
 print(a.reshape(6, 2))  # menjadi 6 kolom dan 2 baris
 print(a.reshape(2, 6))  # menjadi 2 kolom dan 6 baris
 print(f"matrix ukuran = {a.shape}")
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+print(arr)
+newarr = arr.reshape(2, 3, 2)  # 2 buah array, masing masing 3 kolom dan 2 baris
+print(newarr)
+print(f"matrix ukuran = {newarr.shape}")
 
 # resize matrix
 print("resize matrix".center(20, "-"))
@@ -44,3 +49,17 @@ print(f"matrix ukuran = {c.shape}")  # ukuran akan berubah
 d = np.vstack((a, b))  # taruh secara vertikal matrix b disebelah matrix a
 print(d)  # matrix b berada di bawah matrik a
 print(f"matrix ukuran = {d.shape}")  # ukuran akan berubah
+
+d = np.dstack((a, b))  # taruh berdasarkan kedalaman (depth) matrix
+print(d)  # akan memanjang mengikuti matrix a disebelah kanan berisi matrix b
+print(f"matrix ukuran = {d.shape}")  # ukuran akan berubah
+
+# split matrix
+print("split matrix".center(20, "-"))
+arr = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]])
+print(arr)
+newarr = np.array_split(arr, 3)  # dari 1 buah array dibagi menjadi 3 buah array
+print(newarr)
+print(newarr[1])  # ambil nilai pada array kedua
+print(newarr[1][1])  # dari array kedua ambil nilai pada baris ke dua
+print(newarr[1][1][0])  # pada baris ke dua ambil nilai pada index 0
