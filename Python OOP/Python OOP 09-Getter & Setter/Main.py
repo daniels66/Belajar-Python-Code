@@ -1,44 +1,69 @@
+# getter dan setter dalam pyhton
+
+
 class Hero:
-    def __init__(self, name, health, armor):
-        self.name = name
+    def __init__(self, nama, health) -> None:
+        self.nama = nama
         self.__health = health
-        self.__armor = armor
-        # self.info = "name {} : \n\thealth: {}".format(self.name,self.__health)
+        # self.__info = (
+        #     f"nama hero adalah = {self.nama} \nhero memili health = {self.__health}"
+        # )
 
     @property
     def info(self):
-        return "name {} : \n\thealth: {}".format(self.name, self.__health)
+        return f"nama hero adalah = {self.nama} \nhero memili health = {self.__health}"
 
+    # membuat getter dan setter python
     @property
-    def armor(self):
+    def health(self):
         pass
 
-    @armor.getter
-    def armor(self):
-        return self.__armor
+    @health.getter
+    def health(self):
+        return self.__health
 
-    @armor.setter
-    def armor(self, input):
-        self.__armor = input
+    @health.setter
+    def health(self, input):
+        self.__health = input
 
-    @armor.deleter
-    def armor(self):
-        print("armor di delet")
-        self.__armor = None
+    @health.deleter
+    def health(self):
+        print("health di delate")
+        self.__health = None
 
 
-sniper = Hero("sniper", 100, 10)
+hero1 = Hero("daniel", 100)
+print("@property".center(25, "-"))
+print(hero1.info)
+"""
+client dapat merubah info dengan mudah padahal info dibuat agar tidak dapat dirubah,
+apabila membuatnya menjadi private maka akan tidak bisa diakses, apabila mengakses dengan
+getter dan setter maka akan membuat method juga, oleh karena itu lebih baik membuat
+decorator property(@property) yang berguna untuk merubah method menjadi variable
+"""
+# hero1.info = "ayoo"
+# print(hero1.info)
+print(
+    hero1.__dict__
+)  # tidak terdapat variable info akan tetapi dapat mengambil info sebagai method
+"""
+keunggulan @property adalah apabila merubah variable dalam class akan langsung update
+"""
+hero1.nama = "bili"
+print(hero1.info)
+print(hero1.__dict__)
 
-print("merubah info")
-print(sniper.info)
-sniper.name = "dadang"
-print(sniper.info)
+print("getter & setter".center(25, "-"))
+print("health hero ", hero1.nama, "adalah =", str(hero1.health))
+# merubah health hero
+print(hero1.__dict__)
+hero1.health = 40  # setter atau merubah nilai health
+print("health hero ", hero1.nama, "adalah = ", str(hero1.health))
+print(hero1.__dict__)
 
-print("getter dan setter untuk __armor:")
-print(sniper.armor)
-sniper.armor = 50
-print(sniper.armor)
-
-print("delete armor")
-del sniper.armor
-print(sniper.__dict__)
+print("deleter".center(25, "-"))
+"""
+deleter digunakan untuk mendelete variable dalam class
+"""
+del hero1.health
+print(hero1.__dict__)
