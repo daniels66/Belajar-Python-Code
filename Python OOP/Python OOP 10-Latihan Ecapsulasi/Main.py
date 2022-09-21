@@ -21,13 +21,15 @@ class Hero:
 
     @property
     def info(self):
-        return "{} level {}: \n\thealth = {}/{} \n\tattack = {} \n\tarmor = {}".format(
+        return "{} level {}: \n\thealth = {}/{} \n\tattack = {} \n\tarmor = {} \n\texp = {}".format(
             self.__name,
             self.__level,
             self.__health,
             self.__healthMax,
             self.__attPower,
             self.__armor,
+            self.__exp,
+            print(30 * "-"),
         )
 
     @property
@@ -38,6 +40,7 @@ class Hero:
     def gainExp(self, addExp):
         self.__exp += addExp
         if self.__exp >= 100:
+            print(30 * "-"),
             print(self.__name, "level up")
             self.__level += 1
             self.__exp -= 100
@@ -53,9 +56,11 @@ class Hero:
 slardar = Hero("slardar", 100, 5, 10)
 axe = Hero("axe", 100, 5, 10)
 print(slardar.info)
+print(axe.info)
 
 slardar.attack(axe)
+print(slardar.info)
 slardar.attack(axe)
+print(slardar.info)
 slardar.attack(axe)
-
 print(slardar.info)
