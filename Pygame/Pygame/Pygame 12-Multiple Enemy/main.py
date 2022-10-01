@@ -114,23 +114,6 @@ def move_pic_max():
         player_y = tinggi_y - 67
 
 
-# fungsi enemy movemnt
-def enemy_movement():
-    for i in range(banyak_enemy):
-        enemy_x[i] += enemyx_change[i]
-        if enemy_x[i] <= 0:
-            enemyx_change[i] = 2
-            enemy_y[i] += enemyy_change[i]
-        elif enemy_x[i] >= (lebar_x - 64):
-            enemyx_change[i] = -2
-            enemy_y[i] += enemyy_change[i]
-
-        duar = tabrakan(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
-        tabrak(duar)
-
-        enemy_img(enemy_x[i], enemy_y[i], i)
-
-
 # fungsi bullet movement
 def bullet_movement():
     global bullet_y, bullet_state
@@ -177,13 +160,27 @@ while True:
             sys.exit()
         movement_key()
 
-    enemy_movement()
-
-    bullet_movement()
     player_img(player_x, player_y)
 
     player_x += playerx_change
     player_y += playery_change
     move_pic_max()
+
+    # enemy movement
+    for i in range(banyak_enemy):
+        enemy_x[i] += enemyx_change[i]
+        if enemy_x[i] <= 0:
+            enemyx_change[i] = 2
+            enemy_y[i] += enemyy_change[i]
+        elif enemy_x[i] >= (lebar_x - 64):
+            enemyx_change[i] = -2
+            enemy_y[i] += enemyy_change[i]
+
+        duar = tabrakan(enemy_x[i], enemy_y[i], bullet_x, bullet_y)
+        tabrak(duar)
+
+        enemy_img(enemy_x[i], enemy_y[i], i)
+
+    bullet_movement()
 
     pygame.display.update()
