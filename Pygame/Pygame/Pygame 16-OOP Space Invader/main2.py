@@ -75,18 +75,8 @@ class Enemy:
         self.lawan_ubahy = ubahy
 
     # fungsi menambahkan gambar enemy
-    def pict_enemy(self):
-        for i in range(banyak_lawan):
-            screen.blit(self.gambar[i], (self.posisix[i], self.posisiy[i]))
-
-    # fungsi enemy movemnt
-    def enemy_movement(self):
-        if self.posisix[i] <= 0:
-            self.lawan_ubahx[i] = 2
-            self.posisiy[i] += self.lawan_ubahy[i]
-        elif self.posisix[i] >= (lebar_x - 64):
-            self.lawan_ubahx[i] = -2
-            self.posisiy[i] += self.lawan_ubahy[i]
+    def pict_enemy(self, x, y, i):
+        screen.blit(self.gambar[i], (x, y))
 
 
 # membuat class peluru
@@ -128,13 +118,27 @@ def tabrakan(x1, y1, x2, y2):
 
 # fungsi setelah terjadi tabrakan
 def tabrak(tabrak):
+    global score_value
     if tabrak:
         bullet.posisiy = 470
         bullet.status_peluru = "ready"
+        score_value += 1
         tabrak_sound = mixer.Sound("sound/explosion.wav")
         tabrak_sound.play()
-        lawan.posisix = random.randint(0, 735)
-        lawan.posisiy = random.randint(30, 120)
+        enemy.posisix[i] = random.randint(0, 735)
+        enemy.posisiy[i] = random.randint(30, 120)
+
+
+# fungsi menampilkan score
+def tampil_score(x, y):
+    score = score_font.render("Score = " + str(score_value), True, (255, 255, 255))
+    screen.blit(score, (x, y))
+
+
+# fungsi menampilkan game over
+def game_over():
+    over = over_font.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(over, (200, 250))
 
 
 # gambar pemain
@@ -157,19 +161,22 @@ for i in range(banyak_lawan):
         lawan_ubahx.append(-2)
     elif lawanx[i] < 400:
         lawan_ubahx.append(2)
-        lawan_ubahy.append(30)
-
-print(f"lawan = {lawan}")
-print(f"lawanx = {lawanx}")
-print(f"lawany = {lawany}")
-print(f"lawan_ubahx = {lawan_ubahx}")
-print(f"lawan_ubahy = {lawan_ubahy}")
+    lawan_ubahy.append(30)
 
 enemy = Enemy(lawan, lawanx, lawany, lawan_ubahx, lawan_ubahy)
 
 # gambar peluru
 bullet = pygame.image.load("gambar/bullet.png")
 bullet = Peluru(bullet, 0, 470, 4, "ready")
+
+# set score dalam screen
+score_value = 0
+score_font = pygame.font.Font("freesansbold.ttf", 25)
+score_x = 0
+score_y = 10
+
+# game over font
+over_font = pygame.font.Font("freesansbold.ttf", 64)
 
 # looping game
 while True:
@@ -188,7 +195,17 @@ while True:
     pemain.posisix += pemain.ubahx
     pemain.player_max()
 
+    # fungsi enemy movement
     for i in range(banyak_lawan):
+
+        # Game Over
+        if enemy.posisiy[i] > 440:
+            for j in range(banyak_lawan):
+                enemy.posisiy[j] = 2000
+            game_over()
+            break
+
+        # enemy gerak kekanan dan kekiri
         enemy.posisix[i] += enemy.lawan_ubahx[i]
         if enemy.posisix[i] <= 0:
             enemy.lawan_ubahx[i] = 2
@@ -197,11 +214,14 @@ while True:
             enemy.lawan_ubahx[i] = -2
             enemy.posisiy[i] += enemy.lawan_ubahy[i]
 
+        # apabila terjadi tabrakan antara peluru dan enemy
         duar = tabrakan(
             enemy.posisix[i], enemy.posisiy[i], bullet.posisix, bullet.posisiy
         )
         tabrak(duar)
 
-        enemy.pict_enemy()
+        # menapilkan gambar enemy
+        enemy.pict_enemy(enemy.posisix[i], enemy.posisiy[i], i)
 
+    tampil_score(score_x, score_y)
     pygame.display.update()
