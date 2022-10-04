@@ -76,16 +76,17 @@ class Enemy:
 
     # fungsi menambahkan gambar enemy
     def pict_enemy(self):
-        screen.blit(self.gambar, (self.posisix, self.posisiy))
+        for i in range(banyak_lawan):
+            screen.blit(self.gambar[i], (self.posisix[i], self.posisiy[i]))
 
     # fungsi enemy movemnt
     def enemy_movement(self):
-        if self.posisix <= 0:
-            self.lawan_ubahx = 2
-            self.posisiy += self.lawan_ubahy
-        elif self.posisix >= (lebar_x - 64):
-            self.lawan_ubahx = -2
-            self.posisiy += self.lawan_ubahy
+        if self.posisix[i] <= 0:
+            self.lawan_ubahx[i] = 2
+            self.posisiy[i] += self.lawan_ubahy[i]
+        elif self.posisix[i] >= (lebar_x - 64):
+            self.lawan_ubahx[i] = -2
+            self.posisiy[i] += self.lawan_ubahy[i]
 
 
 # membuat class peluru
@@ -141,16 +142,30 @@ pict = pygame.image.load("gambar/player.png")
 pemain = Player(pict, 375, 470, 0, 0)
 
 # gambar enemy
-lawan = pygame.image.load("gambar/enemy.png")
-lawanx = random.randint(0, 735)
-lawany = random.randint(30, 120)
-# membuat variable perubahan player x dan y
-if lawanx > 400:
-    lawan_ubahx = -2
-elif lawanx < 400:
-    lawan_ubahx = 2
-lawan_ubahy = 30
-lawan = Enemy(lawan, lawanx, lawany, lawan_ubahx, lawan_ubahy)
+lawan = []
+lawanx = []
+lawany = []
+lawan_ubahx = []
+lawan_ubahy = []
+banyak_lawan = 6
+for i in range(banyak_lawan):
+    lawan.append(pygame.image.load("gambar/enemy.png"))
+    lawanx.append(random.randint(0, 735))
+    lawany.append(random.randint(30, 120))
+    # membuat variable perubahan player x dan y
+    if lawanx[i] > 400:
+        lawan_ubahx.append(-2)
+    elif lawanx[i] < 400:
+        lawan_ubahx.append(2)
+        lawan_ubahy.append(30)
+
+print(f"lawan = {lawan}")
+print(f"lawanx = {lawanx}")
+print(f"lawany = {lawany}")
+print(f"lawan_ubahx = {lawan_ubahx}")
+print(f"lawan_ubahy = {lawan_ubahy}")
+
+enemy = Enemy(lawan, lawanx, lawany, lawan_ubahx, lawan_ubahy)
 
 # gambar peluru
 bullet = pygame.image.load("gambar/bullet.png")
@@ -173,11 +188,20 @@ while True:
     pemain.posisix += pemain.ubahx
     pemain.player_max()
 
-    lawan.enemy_movement()
-    lawan.posisix += lawan.lawan_ubahx
-    lawan.pict_enemy()
+    for i in range(banyak_lawan):
+        enemy.posisix[i] += enemy.lawan_ubahx[i]
+        if enemy.posisix[i] <= 0:
+            enemy.lawan_ubahx[i] = 2
+            enemy.posisiy[i] += enemy.lawan_ubahy[i]
+        elif enemy.posisix[i] >= (lebar_x - 64):
+            enemy.lawan_ubahx[i] = -2
+            enemy.posisiy[i] += enemy.lawan_ubahy[i]
 
-    duar = tabrakan(lawan.posisix, lawan.posisiy, bullet.posisix, bullet.posisiy)
-    tabrak(duar)
+        duar = tabrakan(
+            enemy.posisix[i], enemy.posisiy[i], bullet.posisix, bullet.posisiy
+        )
+        tabrak(duar)
+
+        enemy.pict_enemy()
 
     pygame.display.update()
