@@ -5,7 +5,7 @@
 # 4. hapus data siswa
 # 5. pilihan tidak ditemukan
 
-# Read Database
+# create Database
 
 import os
 import database
